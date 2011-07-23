@@ -5,13 +5,12 @@
   "author": "Big Bang Technology <info@bigbangtechnology.com",
   "contributors": [
     { "name" : "Cameron Westland", "email" : "cameron@bigbangtechnology.com" }
-  ]
+  ],
   "dependencies": {
     "jsdom": "0.2.0"
   },
-
-  "keywords": ["crawling", "scraping", "http", "https"]
-  "repository": "git://github.com/bigbangtechnology/warp.git"
+  "keywords": ["crawling", "scraping", "http", "https"],
+  "repository": "git://github.com/bigbangtechnology/warp.git",
   "main": "index",
-  "engines": { "node": ">= 0.4.9" }
-}
+  "engines": { "node": ">= 0.4.7" }
+ }
