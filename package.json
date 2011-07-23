@@ -1,5 +1,5 @@
 {
-  "name": "wormhole",
+  "name": "warp",
   "description": "Jump right to where you want to be. Easy Web Crawling in JavaScript",
   "version": "0.0.1",
   "author": "Big Bang Technology <info@bigbangtechnology.com",
@@ -11,7 +11,7 @@
   },
 
   "keywords": ["crawling", "scraping", "http", "https"]
-  "repository": "git://github.com/bigbangtechnology/wormhole.git"
+  "repository": "git://github.com/bigbangtechnology/warp.git"
   "main": "index",
   "engines": { "node": ">= 0.4.9" }
 }

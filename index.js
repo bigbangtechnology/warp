@@ -1,1 +1,1 @@
-module.exports = require('./lib/wormhole.js')
+module.exports = require('./lib/warp.js')
