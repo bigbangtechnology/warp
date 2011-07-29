@@ -1,19 +1,22 @@
 var Warp = require('../lib/warp.js');
 
 
+
+
+
 exports["When you perform a GET you should have the page accessible after loaded"] = function(test) {
   sut = new Warp();
 
-  var mockHttpResponse = {};
+  sut.request = function(options, callbackFunction) {
+    callbackFunction("<p>Hello World!</p>");
+  }
 
   sut.visit({
-    host: 'www.google.ca',
+    host: 'example.com',
     path: '/',
     loaded: function($) {
-      test.ok($('#addlang').html().match(/Google.ca/));
+      test.equal($('p').html(), "Hello World!");
       test.done();
     }
   });
 }
-
-
