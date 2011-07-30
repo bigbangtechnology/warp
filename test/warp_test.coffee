@@ -1,23 +1,38 @@
+fs = require('fs')
+path = require('path')
+server = require('./server')
+
 Warp = (require '../lib/warp').Warp
+
+serverTestDone = (s, test) ->
+  s.close()
+  delete s
+  test.done()
 
 module.exports =
   "When you perform a GET you should have the page accessible after loaded": (test) ->
     sut = new Warp
 
-    sut.get = (options, callbackFunction) ->
-      callbackFunction "<p>Hello World!</p>"
+    s = server.createServer()
 
     sut.visit
-      url: 'http://example.com/'
+      url: "#{s.url}/helloWorld"
       loaded: ($) ->
         test.equal $('p').html(), "Hello World!"
-        test.done()
+        serverTestDone(s, test)
 
-  "When you visit http://google.ca you redirect to http://www.google.ca!": (test) ->
+  "When you visit loginPage which sets a session cookie, you should be able to visit securePage which requires the session cookie": (test) ->
     sut = new Warp
 
+    s = server.createServer()
+
     sut.visit
-      url: 'http://google.ca'
+      url: "#{s.url}/loginPage"
       loaded: ($) ->
-        test.equal $('title').text(), "Google"
-        test.done()
+        test.equal $('p').html(), "Login Page"
+
+        sut.visit
+          url: "#{s.url}/securePage"
+          loaded: ($) ->
+            test.equal $('p').html(), "Secure Page"
+            serverTestDone(s, test)

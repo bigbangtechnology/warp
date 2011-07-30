@@ -19,7 +19,6 @@ class Warp
   # wrapper around http 
   get: (options, callbackFunction) ->
     request options, (error, response, body) ->
-      debugger
       callbackFunction body
 
 exports.Warp = Warp

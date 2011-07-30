@@ -1,0 +1,11 @@
+{
+  "requireCookies": [
+    { "name" : "session", "redirectLocation": "loginPage" }
+  ],
+
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8"
+  },
+
+  "body": "<p>Secure Page</p>"
+}
