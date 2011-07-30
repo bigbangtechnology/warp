@@ -8,9 +8,16 @@ module.exports =
       callbackFunction "<p>Hello World!</p>"
 
     sut.visit
-      host: 'example.com'
-      path: '/'
+      url: 'http://example.com/'
       loaded: ($) ->
-        console.log "LOADED!"
         test.equal $('p').html(), "Hello World!"
+        test.done()
+
+  "When you visit http://google.ca you redirect to http://www.google.ca!": (test) ->
+    sut = new Warp
+
+    sut.visit
+      url: 'http://google.ca'
+      loaded: ($) ->
+        test.equal $('title').text(), "Google"
         test.done()

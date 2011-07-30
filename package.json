@@ -7,7 +7,8 @@
     { "name" : "Cameron Westland", "email" : "cameron@bigbangtechnology.com" }
   ],
   "dependencies": {
-    "jsdom": "0.2.0"
+    "jsdom": "0.2.0",
+    "request": "2.0.2"
   },
   "keywords": ["crawling", "scraping", "http", "https"],
   "repository": "git://github.com/bigbangtechnology/warp.git",

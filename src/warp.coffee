@@ -1,5 +1,5 @@
 jsdom = require('jsdom')
-http = require('http')
+request = require('request')
 
 jQueryPath = 'http://code.jquery.com/jquery-1.4.2.min.js'
 
@@ -7,10 +7,7 @@ class Warp
   # base visit class
   visit: (options) ->
     httpOptions =
-      host: options.host
-      path: options.path
-      port: 80
-      method: 'GET'
+      url: options.url
 
     @get httpOptions, (html) ->
       jsdom.env
@@ -21,11 +18,8 @@ class Warp
 
   # wrapper around http 
   get: (options, callbackFunction) ->
-    req = http.request options, (res) ->
-      html = ""
-
-      res.on 'data', (chunk) -> html += chunk
-      res.on 'end', ->
-        callbackFunction html
+    request options, (error, response, body) ->
+      debugger
+      callbackFunction body
 
 exports.Warp = Warp
