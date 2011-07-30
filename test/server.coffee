@@ -24,7 +24,7 @@ redirectTo = (req, resp, location) ->
       cookieName = cookieRequirement.name
       redirectLocation = cookieRequirement.redirectLocation
 
-      if !req.headers['Cookie']?.match(new RegExp cookieName)
+      if !req.headers['cookie']?.match(new RegExp cookieName)
         redirectTo req, resp, redirectLocation
 
   resp.writeHead 200, document.headers
