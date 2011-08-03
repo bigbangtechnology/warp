@@ -1,5 +1,6 @@
 jsdom = require('jsdom')
 request = require('request')
+querystring = require('querystring')
 
 jQueryPath = 'http://code.jquery.com/jquery-1.4.2.min.js'
 
@@ -11,8 +12,11 @@ class Warp
 
   # base visit class
   visit: (options) ->
+    # append query onto the end of the url
+
+    
     httpOptions =
-      url: options.url
+      url: @urlWithQuery(options.url, options.query)
       headers: {}
 
     # add cookies to httpOptions
@@ -31,5 +35,7 @@ class Warp
       @cookies.store(response)
       callbackFunction body
 
+  urlWithQuery: (url, query) ->
+    "#{url}?#{querystring.stringify(query)}"
 
 exports.Warp = Warp
