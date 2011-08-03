@@ -1,1 +1,1 @@
-module.exports = require('./src/warp.js')
+module.exports = require('./lib/warp.js')
