@@ -23,12 +23,12 @@ class Warp
     # add cookies to httpOptions
     @cookies.apply(httpOptions)
 
-    @get httpOptions, (html) ->
+    @get httpOptions, (html) =>
       jsdom.env
         html: html
         scripts: [ jQueryPath ]
-        done: (errors, window) ->
-          options.loaded window.$
+        done: (errors, window) =>
+          options.loaded.apply this, [window.$]
 
   # wrapper around http 
   get: (options, callbackFunction) ->

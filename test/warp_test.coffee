@@ -64,3 +64,14 @@ module.exports =
         test.equal $('#login').html(), "login"
         test.equal $('#password').html(), "password"
         serverTestDone(s, test)
+
+  "After visiting a page, 'this' should refer to the instance of Warp": (test) ->
+    sut = new Warp
+
+    s = server.createServer()
+
+    sut.visit
+      url: "#{s.url}/helloWorld"
+      loaded: ($) ->
+        test.equal this, sut
+        serverTestDone(s, test)
