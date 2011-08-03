@@ -19,6 +19,7 @@ class Warp
       url: @urlWithQuery(options.url, options.query)
       headers: {}
       body: querystring.stringify(options.params)
+      method: if options.params then 'POST' else 'GET'
 
     # add cookies to httpOptions
     @cookies.apply(httpOptions)

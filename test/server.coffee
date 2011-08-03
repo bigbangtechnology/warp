@@ -39,7 +39,12 @@ redirectTo = (req, resp, parsedUrl) ->
 
   req.on 'end', ->
     parsedBody = querystring.parse body
-    locals = { params: createParams(parsedUrl.query, parsedBody) }
+
+    if req.method == 'POST'
+      locals = { params: createParams(parsedUrl.query, parsedBody) }
+    else
+      locals = { params: parsedUrl.query }
+
     dynamicBody = ejs.render document.body, { locals: locals }
 
     resp.writeHead 200, document.headers
