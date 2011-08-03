@@ -49,3 +49,18 @@ module.exports =
       loaded: ($) ->
         test.equal $('p').html(), "SEARCH STRING"
         serverTestDone(s, test)
+
+  "When you submit post parameters along with a visit, it should post params to the url": (test) ->
+    sut = new Warp
+
+    s = server.createServer()
+
+    sut.visit
+      url: "#{s.url}/testPostParams"
+      params:
+        login: "login"
+        password: "password"
+      loaded: ($) ->
+        test.equal $('#login').html(), "login"
+        test.equal $('#password').html(), "password"
+        serverTestDone(s, test)

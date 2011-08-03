@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8"
+  },
+
+  "body": "<p id='login'><%= params.login %></p><p id='password'><%= params.password %></p>"
+}

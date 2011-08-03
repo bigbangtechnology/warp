@@ -3,6 +3,7 @@ fs   = require('fs')
 path = require('path')
 url  = require('url')
 ejs  = require('ejs')
+querystring = require('querystring')
 
 exports.createServer = (port = 6767) ->
   server = http.createServer (req, resp) ->
@@ -31,12 +32,28 @@ redirectTo = (req, resp, parsedUrl) ->
       if !req.headers['cookie']?.match(new RegExp cookieName)
         redirectTo req, resp, redirectLocation
 
-  # parse the body params with ejs
-  params = parsedUrl.query
-  locals = { params: params }
+  body = ""
 
-  dynamicBody = ejs.render document.body, { locals: locals }
+  req.on 'data', (chunk) ->
+    body += chunk
 
-  resp.writeHead 200, document.headers
-  resp.write(dynamicBody)
-  resp.end()
+  req.on 'end', ->
+    parsedBody = querystring.parse body
+    locals = { params: createParams(parsedUrl.query, parsedBody) }
+    dynamicBody = ejs.render document.body, { locals: locals }
+
+    resp.writeHead 200, document.headers
+    resp.write dynamicBody
+    resp.end()
+
+createParams = (query, body) ->
+  params = addKeysFrom query, {}
+  params = addKeysFrom body, params
+
+  params
+
+addKeysFrom = (object, params) ->
+  for key, value of object
+    params[key] = value
+
+  params
