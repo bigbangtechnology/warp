@@ -17,12 +17,12 @@ class WarpCookies
 
   # converts the internal cookie store into a cookie string
   getString: ->
-    cookieString = ""
+    cookies = []
 
     for key, value of @cookieStore
-      cookieString += "#{key}=#{value}"
+      cookies.push "#{key}=#{value}"
 
-    return cookieString
+    return cookies.join(";")
 
   # saves the cookies for transmission on subsequent requests
   store: (response) ->

@@ -14,7 +14,6 @@ class Warp
   visit: (options) ->
     # append query onto the end of the url
 
-    
     httpOptions =
       url: @urlWithQuery(options.url, options.query)
       headers: {}

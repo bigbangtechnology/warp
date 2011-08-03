@@ -1,0 +1,13 @@
+{
+  "requireCookies": [
+    { "name" : "cookie1", "redirectLocation": "loginPageMultiple" },
+    { "name" : "cookie2", "redirectLocation": "loginPageMultiple" }
+  ],
+
+  "headers": {
+    "Content-Type": "text/html; charset=UTF-8"
+  },
+
+  "body": "<p>Multiple Cookies Secure</p>"
+}
+

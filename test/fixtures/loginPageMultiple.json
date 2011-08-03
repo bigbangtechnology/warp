@@ -1,0 +1,8 @@
+{
+  "headers": {
+    "Set-Cookie": ["cookie1=true; path=/", "cookie2=true; path=/"],
+    "Content-Type": "text/html; charset=UTF-8"
+  },
+
+  "body": "<p>Login Page</p>"
+}
