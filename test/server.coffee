@@ -9,7 +9,7 @@ exports.createServer = (port = 6767) ->
   server = http.createServer (req, resp) ->
     # get the path for the file
     parsedUrl = url.parse req.url, true
-    documentPath = parsedUrl.pathname
+
     redirectTo(req, resp, parsedUrl)
 
   server.listen port
@@ -45,7 +45,7 @@ redirectTo = (req, resp, parsedUrl) ->
   req.on 'end', ->
     parsedBody = querystring.parse body
 
-    if req.method == 'POST'
+    if req.method == 'POST' and req.headers['content-type'] == 'application/x-www-form-urlencoded'
       locals = { params: createParams(parsedUrl.query, parsedBody) }
     else
       locals = { params: parsedUrl.query }

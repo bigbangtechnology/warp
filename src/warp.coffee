@@ -20,6 +20,9 @@ class Warp
       body: querystring.stringify(options.params)
       method: if options.params then 'POST' else 'GET'
 
+    if options.params
+      httpOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+
     # add cookies to httpOptions
     @cookies.apply(httpOptions)
 

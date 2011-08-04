@@ -2,7 +2,7 @@ fs = require('fs')
 path = require('path')
 server = require('./server')
 
-Warp = (require '../lib/warp').Warp
+Warp = (require '../src/warp').Warp
 
 serverTestDone = (s, test) ->
   s.close()
