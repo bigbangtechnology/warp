@@ -79,6 +79,23 @@ module.exports =
         test.equal $('#password').html(), "password"
         serverTestDone(s, test)
 
+  "When you submit a post which responds with a redirect, it should save any returned cookies and then redirect": (test) ->
+    sut = new Warp
+
+    s = server.createServer()
+
+    sut.visit
+      url: "#{s.url}/loginPage"
+      loaded: ($) ->
+        @visit
+          url: "#{s.url}/loginWithRedirectSessionSave"
+          params:
+            login: "login"
+            password: "password"
+          loaded: ($) ->
+            test.equal $('p').html(), "Secure Page After Redirect"
+            serverTestDone(s, test)
+
   "After visiting a page, 'this' should refer to the instance of Warp": (test) ->
     sut = new Warp
 

@@ -1,7 +1,7 @@
 {
   "name": "warp",
   "description": "Jump right to where you want to be. Easy Web Crawling in JavaScript",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Big Bang Technology <info@bigbangtechnology.com",
   "contributors": [
     { "name" : "Cameron Westland", "email" : "cameron@bigbangtechnology.com" }

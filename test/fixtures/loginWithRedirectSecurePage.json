@@ -1,0 +1,9 @@
+{
+  "requireCookies": [
+    { "name" : "logged_in", "redirectLocation" : "loginPage" }
+  ],
+
+  "headers": {},
+
+  "body": "<p>Secure Page After Redirect</p>"
+}

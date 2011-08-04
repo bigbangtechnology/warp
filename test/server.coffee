@@ -37,6 +37,14 @@ redirectTo = (req, resp, parsedUrl) ->
       if cookies.indexOf(cookieName) == -1
         redirectTo req, resp, { pathname: redirectLocation }
 
+  
+  # check to see if our json document wants to redirect
+  if document.headers.hasOwnProperty('location') || document.headers.hasOwnProperty('Location')
+    resp.writeHead 302, document.headers
+    resp.write document.body
+    resp.end()
+
+
   body = ""
 
   req.on 'data', (chunk) ->

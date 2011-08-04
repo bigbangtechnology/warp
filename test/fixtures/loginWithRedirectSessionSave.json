@@ -1,0 +1,12 @@
+{
+  "requireCookies": [
+    { "name" : "session", "redirectLocation": "loginPage" }
+  ],
+  
+  "headers": {
+    "Location": "http://localhost:6767/loginWithRedirectSecurePage",
+    "Set-Cookie": "logged_in=true; path=/"
+  
+  },
+  "body": "<p>Redirecting...</p>"
+}

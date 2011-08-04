@@ -7,7 +7,9 @@ jQueryPath = 'http://code.jquery.com/jquery-1.4.2.min.js'
 WarpCookies = require('./warp_cookies').WarpCookies
 
 class Warp
-  constructor: ->
+  constructor: (options) ->
+    @options = options || {};
+
     @cookies = new WarpCookies
 
   # base visit class
@@ -35,11 +37,30 @@ class Warp
 
   # wrapper around http 
   get: (options, callbackFunction) ->
+    @debug("Request options:")
+    @debug(options)
+
     request options, (error, response, body) =>
+      @debug("Response headers:")
+      @debug(response.headers)
+
       @cookies.store(response)
+
+      if (response.statusCode == 302)
+        options.url = response.headers['location']
+        @debug "Redirecting to #{options.url}"
+
+        @cookies.apply(options)
+        @get options, callbackFunction
+        return
+
       callbackFunction body
 
   urlWithQuery: (url, query) ->
     "#{url}?#{querystring.stringify(query)}"
+
+  debug: (message) ->
+    if @options.debug
+      console.log message
 
 exports.Warp = Warp
