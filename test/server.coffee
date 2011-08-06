@@ -25,7 +25,7 @@ redirectTo = (req, resp, parsedUrl) ->
 
   # check to see if the page transmits the required cookies
   if document.requireCookies?
-    rawCookies = req.headers['cookie'].split(";")
+    rawCookies = req.headers['cookie']?.split(";") || []
 
     cookies = for rawCookie in rawCookies
       rawCookie.split("=")[0]

@@ -37,6 +37,20 @@ module.exports =
             test.equal $('p').html(), "Secure Page"
             serverTestDone(s, test)
 
+  "You should be able to pre-fill a cookie if you already know it": (test) ->
+    sut = new Warp
+
+    s = server.createServer()
+
+    sut.preloadCookie("session=true; path=/")
+
+
+    sut.visit
+      url: "#{s.url}/securePage"
+      loaded: ($) ->
+        test.equal $('p').html(), "Secure Page"
+        serverTestDone(s, test)
+
   "You should be able to browse to pages which require multiple cookies": (test) ->
     sut = new Warp
 

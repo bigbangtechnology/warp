@@ -30,10 +30,12 @@ class WarpCookies
     cookies = response.headers['set-cookie'];
 
     for rawEntry in cookies
-      # we're only concerned with the cookie details
-      details = rawEntry.split(";")[0]
-      [key, value] = details.split("=")
-      @cookieStore[key] = value
+      @storeOne rawEntry
+
+  storeOne: (rawEntry) ->
+    details = rawEntry.split(";")[0]
+    [key, value] = details.split("=")
+    @cookieStore[key] = value
 
   # returns true of the response has no cookies
   empty: (response) ->

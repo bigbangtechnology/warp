@@ -56,6 +56,10 @@ class Warp
 
       callbackFunction body
 
+  # loads a cookies into the datastore
+  preloadCookie: (cookie) ->
+    @cookies.storeOne(cookie)
+
   urlWithQuery: (url, query) ->
     "#{url}?#{querystring.stringify(query)}"
 
