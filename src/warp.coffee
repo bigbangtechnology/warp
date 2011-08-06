@@ -12,10 +12,24 @@ class Warp
 
     @cookies = new WarpCookies
 
+  getJSON: (options) ->
+    httpOptions = @processOptions options
+
+    @get httpOptions, (json) =>
+      options.loaded.apply this, [JSON.parse(json)]
+
   # base visit class
   visit: (options) ->
-    # append query onto the end of the url
+    httpOptions = @processOptions options
 
+    @get httpOptions, (html) =>
+      jsdom.env
+        html: html
+        scripts: [ jQueryPath ]
+        done: (errors, window) =>
+          options.loaded.apply this, [window.$]
+
+  processOptions: (options) ->
     httpOptions =
       url: @urlWithQuery(options.url, options.query)
       headers: {}
@@ -28,12 +42,7 @@ class Warp
     # add cookies to httpOptions
     @cookies.apply(httpOptions)
 
-    @get httpOptions, (html) =>
-      jsdom.env
-        html: html
-        scripts: [ jQueryPath ]
-        done: (errors, window) =>
-          options.loaded.apply this, [window.$]
+    httpOptions
 
   # wrapper around http 
   get: (options, callbackFunction) ->

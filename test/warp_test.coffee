@@ -120,3 +120,15 @@ module.exports =
       loaded: ($) ->
         test.equal this, sut
         serverTestDone(s, test)
+
+  "Should be able to request a json document and have it serialize the object": (test) ->
+    sut = new Warp
+    
+    s = server.createServer()
+
+    sut.getJSON
+      url: "#{s.url}/jsonData"
+      loaded: (data) ->
+        test.equal data.message, "Hello World!"
+        serverTestDone(s, test)
+
