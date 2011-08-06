@@ -8,9 +8,15 @@ WarpCookies = require('./warp_cookies').WarpCookies
 
 class Warp
   constructor: (options) ->
-    @options = options || {};
+    @options = options || {}
 
     @cookies = new WarpCookies
+
+  postJSON: (options) ->
+    httpOptions = @processOptions options
+    httpOptions.method = 'POST'
+    @get httpOptions, (json) =>
+      options.loaded.apply this, [JSON.parse(json)]
 
   getJSON: (options) ->
     httpOptions = @processOptions options
